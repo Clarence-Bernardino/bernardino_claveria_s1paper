@@ -1,5 +1,5 @@
 \documentclass[journal]{./IEEE/IEEEtran}
-\usepackage{cite,graphicx,float}
+\usepackage{cite,graphicx,float,listings,url}
 
 \newcommand{\SPTITLE}{Algorithmic Approaches to Classic Strategy Games - A Comparative Analysis of Search Techniques}
 \newcommand{\ADVISEEA}{Clarence Joshua T. Bernardino}
@@ -17,7 +17,7 @@
 \author{\ADVISEEA~and~\ADVISEEB%
 \REMARK
 }
-% \pubid{\copyright~2006~ICS \UPLB} nag c-clip to nakakainis so comment out muna
+\pubid{\copyright~2006~ICS \UPLB}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -67,7 +67,7 @@ The implementation of the 8-puzzle employed the DFS, BFS, and A* algorithms. By 
     \centering
     \includegraphics[width=0.6\linewidth]{pictures-Clarence/bfs flowchart.png}
     \caption{BFS Flowchart Diagram}
-    \label{fig:bfs}
+    \label{fig:bfs_flowchart}
 \end{figure}
 
   \item \texttt{solve\_dfs(initial\_state)} – Explores the state space using a LIFO stack, prioritizing depth-first expansion.
@@ -76,7 +76,7 @@ The implementation of the 8-puzzle employed the DFS, BFS, and A* algorithms. By 
     \centering
     \includegraphics[width=0.6\linewidth]{pictures-Clarence/dfs flowchart.png}
     \caption{DFS Flowchart Diagram}
-    \label{fig:dfs}
+    \label{fig:dfs_flowchart}
   \end{figure}
 
   \item \texttt{heuristic\_manhattan(board)} – Computes the sum of the Manhattan distances of each tile from its goal position.
@@ -87,7 +87,7 @@ The implementation of the 8-puzzle employed the DFS, BFS, and A* algorithms. By 
     \centering
     \includegraphics[width=0.6\linewidth]{pictures-Clarence/astar flowchart.png}
     \caption{Astar Flowchart Diagram}
-    \label{fig:placeholder}
+    \label{fig:astar_flowchart}
   \end{figure}
 
 \end{itemize}
@@ -104,6 +104,8 @@ The implementation of the 8-puzzle employed the DFS, BFS, and A* algorithms. By 
   \item \texttt{get\_winner()} – Evaluates the board and returns the symbol of the winning player or None if no winner.
 
   \item \texttt{minmax()} – A recursive minimax algorithm that evaluates all possible moves to return a score for the current board state (-1, 0, 1).
+
+  \item \texttt{minmax(alpha, beta)} – A recursive minimax algorithm with alpha–beta pruning, which evaluates possible moves more efficiently by pruning branches that cannot influence the final decision, while still returning a score for the current board state (-1, 0, 1).
 \end{itemize}
 
 \begin{figure}[H]
@@ -120,46 +122,133 @@ For the 8-puzzle solver, the uninformed search algorithms utilized distinct fron
 For the adversarial Tic-Tac-Toe environment, the Minimax algorithm didn't use an external data structure for the frontier. Instead, its effectiveness derives from recursive state space exploration coupled with backtracking. The algorithm implicitly builds a game tree, leveraging the call stack to evaluate moves recursively. It employs a depth-first traversal to mark states with value -1 or 1 from terminal states back to the root, enabling the machine to select moves that maximize its advantage.
 % SECTION 3
 \section{Results}
-The quick brown fox jumps over the lazy dog. The quick brown fox jumps over
-the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown
-fox jumps over the lazy dog.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{pictures-Clarence/performance table.png}
+    \caption{Performance Table Diagram}
+    \label{fig:performance_table}
+\end{figure}
+
+The performance of the three algorithms was evaluated using six distinct test cases (see Appendix). 
+Performance was assessed according to the following criteria:
+
+\begin{itemize}
+    \item \texttt{Execution time} – measured in seconds using Python's \texttt{time} module. Snapshots were recorded immediately before and after the algorithm’s execution, and the elapsed time was obtained by subtracting the start time from the end time.  
+    \item \texttt{States visited} – determined by the number of unique board configurations explored, calculated as the final size of the \texttt{visited} set.  
+    \item \texttt{Path cost} – defined as the length of the move sequence in the solution path.  
+\end{itemize}
 
 \subsection{Performance Evaluation}
-The quick brown fox jumps over the lazy dog. The quick brown fox jumps over
-the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown
-fox jumps over the lazy dog.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{pictures-Clarence/time took bar graph.png}
+    \caption{Time took bar graph Diagram}
+    \label{fig:time_bar_graph}
+\end{figure}
+The execution time of the algorithms varied depending on the initial board configuration. As shown in Figure~\ref{fig:time_bar_graph}, Test Case 1 was relatively straightforward for all algorithms, with near-instantaneous completion times (within the margin of computational precision, prone to truncation errors beyond the 11th decimal place). In contrast, Test Case 4 proved to be significantly more complex, particularly for the Depth-First Search (DFS) algorithm, which required approximately 70 seconds to reach a solution.  
+
+Overall, the results confirm expected theoretical performance: the A* algorithm consistently outperformed the others in terms of efficiency, followed by Breadth-First Search (BFS), while Depth-First Search (DFS) exhibited the longest execution times.  
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{pictures-Clarence/stases visited bar graph.png}
+    \caption{States visited bar graph Diagram}
+    \label{fig:stases_visited_bar_graph}
+\end{figure}
+The number of states visited exhibited similar variation patterns to execution time, as illustrated in Figure~\ref{fig:stases_visited_bar_graph}. The A* algorithm demonstrated superior efficiency in state exploration, visiting substantially fewer nodes than both BFS and DFS across all test cases. This efficiency stems from the heuristic guidance provided by the Manhattan distance metric, which effectively directs the search toward promising paths. BFS consistently visited an intermediate number of states, while DFS exhibited the least efficient exploration strategy, often expanding a large number of irrelevant nodes before finding the solution.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{pictures-Clarence/path cost bar graph.png}
+    \caption{Path cost bar graph Diagram}
+    \label{fig:path_cost_bar_graph}
+\end{figure}
+The solution quality, measured by path cost (number of moves required to reach the goal state), revealed significant differences between algorithms, as depicted in Figure~\ref{fig:path_cost_bar_graph}. Both A* and BFS consistently produced optimal solutions with minimal path lengths, confirming optimality for this problem domain. However, DFS frequently generated suboptimal solutions with substantially longer path lengths, particularly in more complex test cases. This behavior aligns with theoretical expectations, as DFS lacks mechanism for guaranteeing solution optimality and may explore deep, inefficient paths before finding a solution.
+
+\subsection{Minimax}
+When evaluating the performance of the minimax algorithm, two additional counters were introduced into the board state in order to measure efficiency. Since the majority of computation occurs during the initial move, these counters were designed to capture meaningful performance differences between the naive and optimized approaches. For both algorithms, a counter state.node count was used to track the total number of nodes explored. In addition, for the alpha–beta pruning variant, a second counter state.prune count was implemented to record the number of branches pruned during the search. The results of these measurements are presented below.
+
+\subsection{Naive Minimax}
+\begin{itemize}
+    \item Nodes explored: 549946
+    \item Execution time: 0.7795975208282471 seconds
+\end{itemize}
+
+\subsection{Minimax with Alpha-Beta}
+\begin{itemize}
+    \item Nodes explored: 21112
+    \item Prunes: 4926
+    \item Execution time: 0.03299546241760254 seconds
+\end{itemize}
+ 
+The results demonstrate the significant efficiency gains achieved through the use of alpha-beta pruning. Compared to the naive minimax algorithm, the pruned version explored much fewer nodes and achieved a noticeably faster execution time. This improvement is attributed to the pruning mechanism, which effectively eliminates branches that cannot influence the final outcome, increasing the speed without affecting correctness.
 
 % SECTION 4
 \section{Conclusion}
-The quick brown fox jumps over the lazy dog. The quick brown fox jumps over
-the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown
-fox jumps over the lazy dog.
+AI, in its most primal state, is the process of searching for solutions within a defined space. 
+This search is completed through algorithms such as DFS, BFS, A*, and Minimax. While some 
+algorithms generally outperform others, for instance, BFS typically explores fewer nodes than DFS, there 
+exist problem instances where DFS may yield faster results. In the case of the 8-puzzle, A* 
+demonstrated clear superiority, achieving the best balance of time and memory efficiency by using the
+heuristic as a guide. For the tic-tac-toe game, Minimax with alpha–beta pruning consistently outperformed 
+the naive Minimax approach, as pruning allows the algorithm to ignore branches that are non-beneficial.  
 
-\subsection{Real-world Application}
-\subsubsection{... of the AI algorithms}
-\subsubsection{What did you learn or realize about “How AI works?”?}
+These findings highlight a central theme in artificial intelligence: the effectiveness of an algorithm 
+is highly dependent on the nature of the problem being solved. Search methods that use 
+heuristics or optimization strategies, such as A* and alpha–beta pruning, tend to scale better 
+than their naive counterparts. Future work may extend these comparisons to larger state spaces or more 
+complex games, further underscoring the trade-offs between time complexity,  and space complexity that lie 
+at the core of AI problem-solving.
 
-\subsection{Future improvements}
-\subsubsection{... of the AI algorithms}
-\subsubsection{What did you learn or realize about “How AI should be used responsibly?”?}
+\subsection{Real-world Application of the AI algorithms}
+Navigation in complex environments provides a clear real-world application of search algorithms. 
+For example, consider the layout of a large shopping mall. To locate a particular store, one could 
+apply depth-first search (DFS) or breadth-first search (BFS) to systematically explore paths within 
+the mall until the goal is found. However, these approaches may be inefficient, as they do not take 
+into account any knowledge of the mall’s layout. In contrast, the A* algorithm can be used to plan 
+an optimal route by combining actual distances traveled with heuristic estimates of the remaining 
+distance, allowing for faster and more efficient navigation.
 
-\subsection{Challenges}
-\subsubsection{... of the AI algorithms}
-\subsubsection{What did you learn or realize about “How AI is affecting society?”?}
+\subsection{What did you learn or realize about “How AI works?”?}
+I realized that many AI systems can be reduced to search processes. In games, enemy AI searches for 
+the nearest player. In language models, the system searches for the most probable next word. In barcode scanners 
+search for line patterns to convert into signals and more.  
+
+\subsection{Future improvements of the AI algorithms}
+For the first three algorithms, using object-oriented programming from the start would have improved 
+modularity. A better hashing method could also replace the simulated one. In Minimax, the 
+BoardState class could be redesigned to separate AI logic from the board state.  
+
+\subsection{What did you learn or realize about “How AI should be used responsibly?”?}
+Some fear AI will replace jobs, but history shows new technologies often create new opportunities. 
+Like the steam engine, AI may replace certain roles, but those who adapt can use it to complement 
+rather than compete with human labor.  
+
+\subsection{Challenges of the AI algorithms}
+In BFS and DFS, I mistakenly initialized the visited set with the initial state, which caused 
+infinite loops. For Minimax, the main challenge was understanding its recursive structure, which 
+seemed complex at first but became clearer with practice.  
+
+\subsection{What did you learn or realize about “How AI is affecting society?”?}
+Many people now rely on AI for convenience, sometimes at the cost of critical thinking. Over-reliance 
+may lead to complacency, so AI should be used to enhance human ability rather than replace it.  
 
 % SECTION 5
 \section{Responsible Use of AI}
 
 \subsubsection{How much AI did you use? }
+None
 \subsubsection{Justification for responsible use}
-
+N/A
 % APPENDICES
 \appendices
 
 \section{Additional Code Snippets}
-The quick brown fox jumps over the lazy dog. The quick brown fox jumps over
-the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown
-fox jumps over the lazy dog.
+\subsection{Test Cases Used in Evaluation}
+The following test cases were utilized for algorithm performance evaluation as well as the code for the algorithms DFS, BFS, A*, and minmax are located within the github folder "exercise codes bernardino":
+
+\url{https://github.com/Clarence Bernardino/bernardino_claveria_s1paper.git}
+
 
 % BIBLIOGRAPHY
 \bibliographystyle{IEEE/IEEEtran}
@@ -167,10 +256,8 @@ fox jumps over the lazy dog.
 % \nocite{*}
 
 % BIOGRAPHY
-\begin{biography}[{\includegraphics{./yourPicture.eps}}]{Student M. Name}
-Biography text here...
+\begin{biography}[{\includegraphics[width=1\linewidth]{pictures-Clarence/Profile Pic.png}}]{Clarence Joshua T. Bernardino} A Computer Science student at University of the Philippines Los Baños. Loves tinkering with code and Game of Thrones. Hopes to one day make a meaningful impact in the world by technology. 
 \end{biography}
 
 
 \end{document}
- 
