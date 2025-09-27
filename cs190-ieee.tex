@@ -259,5 +259,43 @@ The following test cases were utilized for algorithm performance evaluation as w
 \begin{biography}[{\includegraphics[width=1\linewidth]{pictures-Clarence/Profile Pic.png}}]{Clarence Joshua T. Bernardino} A Computer Science student at University of the Philippines Los Baños. Loves tinkering with code and Game of Thrones. Hopes to one day make a meaningful impact in the world by technology. 
 \end{biography}
 
+\newpage
+\clearpage
+
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Roman{section}}
+
+%EXTENDED INTRODUCTION - Elisha
+\stepcounter{section}
+\section*{\normalsize \thesection. EXTENDED INTRODUCTION}
+\addcontentsline{toc}{section}{\thesection. Extended Introduction}
+
+\section{Extended Introduction}
+
+
+\subsection{Algorithmic comparison of BFS, DFS, A*, minimax}
+What is your understanding of the algorithms based on the three exercises?
+
+\subsection{Breadth-First Search (BFS) and Depth-First Search (DFS)}
+
+The BFS and DFS are graph search algorithms that traverse through a graph or a collection of nodes. 
+These two search algorithms use the data structures queue and stack respectively in assessing 
+the best possible evaluation of such nodes. BFS and DFS also differ from each other due to 
+their manner of searching wherein the BFS algorithm goes level-by-level. On the other hand, 
+DFS starts from the “bottom” or the newly inserted nodes of the graph.\cite{puppyGraph-Graph-Search-Algorithms} 
+
+\subsection{A* Search}
+The A* search is also a search algorithm that has a different approach to reach the goal, 
+the best possible path/s to get to the evaluated or “goal” node in a graph. 
+It uses an evaluation function that utilizes the cost of the path taken by taking in the distance traveled (g(n)) 
+and the estimated remaining distance, also known as the heuristic function(h(n)). Adding these together we get f(n) which 
+results into the most optimal node that balances the cost and remaining distances.
+
+\subsection{Minimax Search}
+The Minimax Search is essentially a game algorithm whose given always behave optimally and a 
+player who attempts to maximize their chances of winning by assuming the opponent is playing 
+optimally. This algorithm checks and evaluates all possible moves in a game tree that can be 
+made through a recursive algorithm. It considers the possible moves the maximizing player can make 
+and chooses one that practically maximizes the other player’s worst move or outcome.
 
 \end{document}
