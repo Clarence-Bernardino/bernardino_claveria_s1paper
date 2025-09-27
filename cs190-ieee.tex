@@ -1,5 +1,16 @@
 \documentclass[journal]{./IEEE/IEEEtran}
-\usepackage{cite,graphicx,float,listings,url}
+\usepackage{cite,graphicx,float,listings,url,fancyhdr}
+
+\fancypagestyle{IEEEoverride}{
+  \fancyhf{}
+  \fancyhead[L]{CMSC 170 Introduction to Artificial Intelligence, \ICS}
+  \fancyhead[R]{\thepage}
+  \fancyfoot[C]{\copyright~2006~ICS \UPLB}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\pagestyle{IEEEoverride}
 
 \newcommand{\SPTITLE}{Algorithmic Approaches to Classic Strategy Games - A Comparative Analysis of Search Techniques}
 \newcommand{\ADVISEEA}{Clarence Joshua T. Bernardino}
@@ -17,7 +28,7 @@
 \author{\ADVISEEA~and~\ADVISEEB%
 \REMARK
 }
-\pubid{\copyright~2006~ICS \UPLB}
+% \pubid{\copyright~2006~ICS \UPLB}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -25,6 +36,9 @@
 
 % TITLE
 \maketitle
+
+%HEADERS
+\thispagestyle{IEEEoverride}
 
 % SECTION 1
 \section{Introduction}
