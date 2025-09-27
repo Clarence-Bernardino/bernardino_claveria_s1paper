@@ -241,7 +241,7 @@ None
 \subsubsection{Justification for responsible use}
 N/A
 % APPENDICES
-\appendices
+\appendix
 
 \section{Additional Code Snippets}
 \subsection{Test Cases Used in Evaluation}
@@ -259,5 +259,327 @@ The following test cases were utilized for algorithm performance evaluation as w
 \begin{biography}[{\includegraphics[width=1\linewidth]{pictures-Clarence/Profile Pic.png}}]{Clarence Joshua T. Bernardino} A Computer Science student at University of the Philippines Los Baños. Loves tinkering with code and Game of Thrones. Hopes to one day make a meaningful impact in the world by technology. 
 \end{biography}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Elisha Julianne Claveria 
+
+\newpage
+\clearpage
+
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Roman{section}}
+
+%EXTENDED INTRODUCTION - Elisha
+\stepcounter{section}
+\section*{\normalsize \thesection. EXTENDED INTRODUCTION}
+\addcontentsline{toc}{section}{\thesection. Extended Introduction}
+
+\section{Extended Introduction}
+Artificial Intelligence search algorithms such as Breadth-First-Search, Depth-First-Search, A*, 
+and Minimax with Alpha-Beta-Pruning are essential in solving complex problems across various fields. 
+These algorithms enable fast and efficient exploration of graphs or states which is immensely beneficial 
+for pathfinding and decision-making type environments. Games such as the 8-puzzle and Tic-Tac-Toe are 
+fitting examples of the implementation of these algorithms. This paper focuses on comparing the 
+said algorithms through game implementations and performance analyzation. By evaluating the BFS, 
+DFS, and A* uninformed and informed search and the Minimax with Alpha-Beta-Pruning adversarial search, 
+we show each of their efficiency and limitations.
+
+
+\subsection{Algorithmic comparison of BFS, DFS, A*, minimax}
+What is your understanding of the algorithms based on the three exercises?
+
+\subsection{Breadth-First Search (BFS) and Depth-First Search (DFS)}
+
+The BFS and DFS are graph search algorithms that traverse through a graph or a collection of nodes. 
+These two search algorithms use the data structures queue and stack respectively in assessing 
+the best possible evaluation of such nodes. BFS and DFS also differ from each other due to 
+their manner of searching wherein the BFS algorithm goes level-by-level. On the other hand, 
+DFS starts from the “bottom” or the newly inserted nodes of the graph.\cite{puppyGraph-Graph-Search-Algorithms} 
+
+\subsection{A* Search}
+The A* search is also a search algorithm that has a different approach to reach the goal, 
+the best possible path/s to get to the evaluated or “goal” node in a graph. 
+It uses an evaluation function that utilizes the cost of the path taken by taking in the distance traveled (g(n)) 
+and the estimated remaining distance, also known as the heuristic function(h(n)). Adding these together we get f(n) which 
+results into the most optimal node that balances the cost and remaining distances.
+
+\subsection{Minimax Search}
+The Minimax Search is essentially a game algorithm whose given always behave optimally and a 
+player who attempts to maximize their chances of winning by assuming the opponent is playing 
+optimally. This algorithm checks and evaluates all possible moves in a game tree that can be 
+made through a recursive algorithm. It considers the possible moves the maximizing player can make 
+and chooses one that practically maximizes the other player’s worst move or outcome.
+
+
+\setcounter{section}{1}
+\renewcommand{\thesection}{\Roman{section}}
+
+\stepcounter{section}
+\section*{\normalsize \thesection. EXTENDED METHODS}
+\addcontentsline{toc}{section}{\thesection. Extended Methods}
+
+
+% SECTION 2
+\section{Extended Methods}
+For the 8-puzzle implementation, a dictionary was primarily used to map integers from 1 to 9 to another 
+set of integers from 0 to 8, representing the slots or tiles of the game board. Additionally, other data 
+structures such as lists, queues, and stacks were employed in the implementation of the search algorithm functions.
+For the Tic-Tac-Toe implementation, a dictionary was used to map integers from 1 to 9 to 
+either ``\_’’, ``X’’, or ``O’’. This structure efficiently updates and accesses board positions throughout the game.
+
+\subsection{8-puzzle Implementation (Full Code in Appendix)}
+\begin{itemize}
+  \item \texttt{empty\_slot(board)} – takes in the puzzle board and finds the position or index of the empty slot(‘0’) in the board.
+
+  \item \texttt{valid\_moves(i)} – takes (‘i’) position and checks for all its possible moves. It returns a list of the tile at position (‘i’) with its adjacent positions.
+
+  \item \texttt{move(board, pos)} – takes in the puzzle board and the pos (empty slot) and moves it based on the user’s input of (‘w’ (up), ‘a’ (left), ‘x’ (down), ‘d’ (right). It then calculates for the new position.
+
+  \item \texttt{check\_win(board)} – takes in the puzzle board and checks if it matches with the goal state.
+
+  \item \texttt{solve\_bfs(initial\_state)} – solves the puzzle board using Breadth-First-Search which finds the shortest path to reach the goal state.
+
+  \item \texttt{solve\_dfs(initial\_state)} – solves the puzzle board using Depth-First-Search which explores each branch of the graph until reaching the goal state.
+
+  \item \texttt{heuristic(initial\_state)} – calculates for the number of misplaced tiles in comparison to the supposed goal state for the puzzle.
+
+  \item \texttt{solve\_astar(initial\_state, heuristic)} – implements the A* search algorithm and finds the shortest path from the initial to goal state, utilizing the heuristic function. 
+\end{itemize}
+
+\subsection{Tic-tac-toe Implementation (Full Code in Appendix)}
+\begin{itemize}
+  \item \texttt{check\_win(spaces)} – takes in the game board(spaces) and checks for all the possible winning combinations on the board (rows, columns, or diagonals). It then checks for a winner.
+
+  \item \texttt{utility(spaces)} – takes in and evaluates the game board for the minimax algorithm. It assigns a resulting value or score based on the result.
+
+  \item \texttt{max\_value(spaces, a, b)} –  recursive function that simulates the moves to find the maximum utility for the maximizing player.
+
+  \item \texttt{min\_value(spaces, a, b)} – recursive function that simulates the moves to find the minimum utility for the minimizer player.
+
+  \item \texttt{alpha\_beta\_search(spaces, player)} – utilizes minimax algorithm with alpha-beta pruning to find the best possible move for the player.
+\end{itemize}
+
+
+\subsubsection{Choice of data structure, per algorithm, per exercise; and}
+\subsubsection{What are the differences between each one’s implementation ?}.\newline
+The 8-puzzle game used uninformed and informed search algorithms for state exploration. 
+Breadth-First-Search used a queue, to find the shortest possible solution path. On the other hand, 
+Depth-First-Search used a stack to explore each branch up to the last nodes of the graph. The A* algorithm 
+utilized a heuristic function for counting misplaced tiles. Given this, it uses an evaluation function 
+of F = G(path cost) + H (heuristic value). This balances the performance of the player, being the most optimal.
+
+The Tic-tac-toe game, used an adversarial search utilizing the Minimax algorithm 
+together with alpha-beta pruning. The code implements utility evaluation and searches through possible 
+moves recursively and finds the most optimal move for the maximizing player. Comparing this to the 8-puzzle 
+game, instead of searching for a single fixed goal, the former is concerned with making decisions  against an 
+opponent. Entailing maximizing and minimizing the moves until an end result.
+
+
+\setcounter{section}{2}
+\renewcommand{\thesection}{\Roman{section}}
+
+\stepcounter{section}
+\section*{\normalsize \thesection. EXTENDED RESULTS}
+\addcontentsline{toc}{section}{\thesection. Extended Results}
+
+
+% SECTION 3
+\setcounter{section}{2}
+\renewcommand{\thesection}{\Roman{section}}
+
+\stepcounter{section}
+\section*{\normalsize \thesection. EXTENDED RESULTS}
+\addcontentsline{toc}{section}{\thesection. Extended Results}
+
+
+\section{Extended Results}
+
+\setcounter{figure}{0}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{pictures-Elisha/results_table.PNG}
+    \caption{Performance Table Diagram}
+    \label{fig:performance_table}
+\end{figure}
+
+The table shows a detailed  breakdown of time taken (in seconds), states visited, and path cost for each 
+algorithm (DFS, BFS, A Star*) across the test cases(1-6), offering precise numerical insights. It confirms 
+the trends seen in the charts, with A04 and A05 showing the highest values across all metrics. 
+
+The performance of the three algorithms was evaluated using six distinct test cases (see Appendix). 
+Performance was assessed according to the following criteria:
+
+\begin{itemize}
+    \item \texttt{Execution time} – measured in seconds using Python's \texttt{time} module. Snapshots were recorded immediately before and after the algorithm’s execution, and the elapsed time was obtained by subtracting the start time from the end time.  
+    \item \texttt{States visited} – determined by the number of unique board configurations explored, calculated as the final size of the \texttt{visited} set.  
+    \item \texttt{Path cost} – defined as the length of the move sequence in the solution path.  
+\end{itemize}
+
+\subsection{Performance Evaluation}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{pictures-Elisha/Time taken (in seconds ).png}
+    \caption{Time taken bar graph Diagram}
+    \label{fig:time_bar_graph}
+\end{figure}
+
+The table shows the time measurements for each algorithm and its test case. Most of which are fast or 
+rapid as compared to other test cases having most values near 0. On the other hand, Test Case 4 for the 
+DFS (around 85 seconds) and A Star Algorithm (around 20 seconds), and Test Case 6  for the DFS Algorithm (around 32 seconds), 
+showing substantial execution time for these three instances. Based on these results, It illustrates how the Depth-First 
+Search algorithm is more time-intensive compared to the other two search algorithms. Also, It shows how the 
+different test cases affect execution time, wherein Test Cases 4 and 6 appear to be more complicated than of the others. 
+
+All in all, the A star algorithm appears to be the most efficient search algorithm, based on execution 
+time, compared to the BFS and DFS search algorithms.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{pictures-Elisha/States Visited (1).png}
+    \caption{States Visited bar graph Diagram}
+    \label{fig:states_visited_bar_graph}
+\end{figure}
+
+As seen in this chart, It shows the number of states visited across all the test cases. 
+It is evident in Test Cases 4 and 6 there is a significant difference among the other cases. 
+Test Case 4 using BFS Algorithm shows the highest number of states. It stays consistent how Test Case 
+4 appears to be the more complex case among the rest. Similarly, A star Algorithm also stays 
+consistent as the most efficient algorithm.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{pictures-Elisha/Path Cost (1).png}
+    \caption{Path Cost bar graph Diagram}
+    \label{fig:path_cost_bar_graph}
+\end{figure}
+
+The chart shows the path cost with most Test Cases showing minimal time except again for 
+Test Cases 4 and 6, peaking at around 60,000 and 40,000 respectively. Additionally, the chart 
+shows significant results for the BFS and A Star search algorithms once again. Such results stay 
+consistent with the previous findings, overall, the A star algorithm appears to be the most efficient 
+and optimal search algorithm.
+
+
+\subsection{Minimax}
+
+\subsection{Naive Minimax}
+\begin{itemize}
+    \item Nodes explored: 15172
+    \item Execution time:  0.042225 seconds
+\end{itemize}
+
+\subsection{Minimax with Alpha-Beta}
+\begin{itemize}
+    \item Nodes explored: 1086
+    \item Prunes: 410
+    \item Execution time: 0.004222 seconds
+\end{itemize} 
+
+
+Based on these results, the Alpha-Beta-Pruning Algorithm outperformed the Naive Minimax 
+Algorithm having an average execution time of 0.004222 seconds making it around 10 times faster 
+than the latter. Additionally, the nodes explored by the Alpha-Beta-Pruning Algorithm have fewer 
+than Naive Minimax, due to the pruning mechanism utilized. Overall, the results show the efficiency 
+of Alpha-Beta-Pruning Algorithm in making optimal moves as well as reducing search spaces.
+
+
+% SECTION 4
+\setcounter{section}{3}
+\renewcommand{\thesection}{\Roman{section}}
+
+\stepcounter{section}
+\section*{\normalsize \thesection. EXTENDED CONCLUSION}
+\addcontentsline{toc}{section}{\thesection. Extended Conclusion}
+
+\section{Extended Conclusion}
+In essence, this study shows a comprehensive understanding of various search algorithms 
+through their utilization in the games: 8 puzzle and Tic-Tac-Toe. The study emphasizes the 
+differences of such algorithms showing how they work differently. Breadth-First-Search and 
+Depth-First-Search are Uninformed Search Strategies which involve traversing through graphs 
+using queues and stacks. The A star is an Informed Search Strategy algorithm which utilizes 
+heuristics and lastly the Minimax Alpha-Beta-Pruning Algorithm is an Adversarial Search or Decision Making. 
+
+Overall, the results show A Star Algorithm as the most efficient for solving the 8-puzzle 
+game which consistently outperformed the BFS and DFS Algorithms in terms of Execution Time, 
+States Visited, and Path Cost. Moreover, In the Adversarial Search Algorithms, the Alpha-Beta-Pruning 
+proves to be more optimal than the naive Minimax. This is seen in the results wherein the former had an 
+approximately 10 times faster execution than the latter, exploring lesser nodes, and having an average of 
+410.50 prunes. All in all, these findings indicate the value of heuristics and pruning in further enhancing 
+efficiently and optimality.
+
+\subsection{Real-world Application of the AI algorithms}
+The Breadth-First-Search (BFS), Depth-First-Search (DFS), and A* algorithms can be utilized in
+path-finding problems such as in games, navigation, and route planning. Additionally, the
+Minimax and Alpha-Beta-Pruning algorithms can be applied to game engines, decision-making, and in models.
+
+\subsection{Future Improvements of the AI algorithms}
+For the 8-puzzle game, I could have improved the AI Algorithm through the use of a better 
+heuristic function such as the Manhattan Distance. Additionally, for both game implementation, 
+a better representation for the boards or states could have improved the optimization and 
+efficiency of these algorithms.
+
+\subsection{Challenges of the AI algorithms}
+With the past three exercises, I had most difficulty with the Depth-First-Search Algorithm as well as the 
+A Star Algorithm. Since I had to finish the exercises only within lab hours I struggled to make my work 
+fully working and optimized. I was able to fully grasp and finish my code, only after my laboratory class. 
+This shows how I need to put more effort into understanding the implementation of AI algorithms and in optimizing my time.
+
+\subsection{What did you learn or realize about “How AI works?”?}
+With the past three exercises, I learned how AI, as seen in the 8-puzzle game and Tic-Tac-Toe, works by 
+utilizing algorithms such as the BFS, DFS, A*, and Minimax in order to evaluate states through search and 
+optimization mechanisms or strategies. I realized how AI can not only provide optimal solutions to simple 
+game problems, but also to other real-world problems. By analyzing models, optimizing logistics, and searching for 
+patterns, Artificial Intelligence’s reach extends to varying applications further enhancing efficiency in many 
+industries such as transportation, technology, and healthcare.
+
+\subsection{“How it should be used responsibly?”}
+AI should be used with transparency, Its use should be first acknowledged. The users of 
+Artificial Intelligence should also be accountable for whatever consequences AI's use may carry. 
+Moreover, to responsibly use AI is to use it for good and not for any deceitful endeavors.
+
+\subsection{“How it is affecting society?”}
+As a Computer Science student, I believe that AI has overall impacted our growth and 
+development by enhancing various industries in, as mentioned before, transportation, 
+technology, and healthcare. While Artificial Intelligence has quickly aided optimization 
+and improvements in our society, there is still an issue in its way of ethical use. Given 
+this, using AI should always be guided with transparency, accountability, and integrity.
+
+%SECTION 5
+\setcounter{section}{4}
+\renewcommand{\thesection}{\Roman{section}}
+
+\stepcounter{section}
+\section*{\normalsize \thesection. EXTENDED RESPONSIBLE USE OF AI}
+\addcontentsline{toc}{section}{\thesection. Extended Responsible Use of AI}
+
+\section{Extended Responsible Use of AI}
+
+\subsection{How much AI did you use in your work, which parts of your work involved the use of AI tools?}
+I used AI tools in my base code for the 8-puzzle problem. I specifically utilized AI tools in my move(board, pos) function.
+
+\subsection{Explain how you used AI responsibly and ethically in completing the task.}
+Since I was having a difficult time in fully grasping the logic for the possible moves the user can do, 
+I inquired on how I can get the value of the new position (when the current position is swapped onto the next) 
+and I applied the logic through mathematics, since I already have the values for the row and column of the 0 or 
+empty slot.
+
+% APPENDICES
+\appendix
+
+\section{Additional Code Snippets}
+\subsection{Test Cases Used in Evaluation}
+The following test cases were utilized for algorithm performance evaluation as well as the code for the algorithms DFS, BFS, A*, and minmax are located within the github folder "exercise codes bernardino" and "exercise codes claveria":
+
+\url{https://github.com/Clarence Bernardino/bernardino_claveria_s1paper.git}
+
+
+% BIBLIOGRAPHY
+\bibliographystyle{IEEE/IEEEtran}
+\bibliography{cs190-ieee}
+% \nocite{*}
+
+
+% BIOGRAPHY
+\begin{biography}[{\includegraphics[width=1\linewidth]{pictures-Elisha/Claveria_2x2.jpg}}]{Elisha Julianne V. Claveria} 3rd year Bachelor of Science in Computer Science at University of the Philippines. Enjoys creating art, mainly through paintings and sketches.  
+\end{biography}
 
 \end{document}
