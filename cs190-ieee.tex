@@ -362,4 +362,105 @@ moves recursively and finds the most optimal move for the maximizing player. Com
 game, instead of searching for a single fixed goal, the former is concerned with making decisions  against an 
 opponent. Entailing maximizing and minimizing the moves until an end result.
 
+
+\setcounter{section}{2}
+\renewcommand{\thesection}{\Roman{section}}
+
+\stepcounter{section}
+\section*{\normalsize \thesection. EXTENDED RESULTS}
+\addcontentsline{toc}{section}{\thesection. Extended Results}
+
+
+% SECTION 3
+\section{Extended Results}
+
+\setcounter{figure}{0}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{pictures-Elisha/results_table.PNG}
+    \caption{Performance Table Diagram}
+    \label{fig:performance_table}
+\end{figure}
+
+The table shows a detailed  breakdown of time taken (in seconds), states visited, and path cost for each 
+algorithm (DFS, BFS, A Star*) across the test cases(1-6), offering precise numerical insights. It confirms 
+the trends seen in the charts, with A04 and A05 showing the highest values across all metrics. 
+
+The performance of the three algorithms was evaluated using six distinct test cases (see Appendix). 
+Performance was assessed according to the following criteria:
+
+\begin{itemize}
+    \item \texttt{Execution time} – measured in seconds using Python's \texttt{time} module. Snapshots were recorded immediately before and after the algorithm’s execution, and the elapsed time was obtained by subtracting the start time from the end time.  
+    \item \texttt{States visited} – determined by the number of unique board configurations explored, calculated as the final size of the \texttt{visited} set.  
+    \item \texttt{Path cost} – defined as the length of the move sequence in the solution path.  
+\end{itemize}
+
+\subsection{Performance Evaluation}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{pictures-Elisha/Time taken (in seconds ).png}
+    \caption{Time taken bar graph Diagram}
+    \label{fig:time_bar_graph}
+\end{figure}
+
+The table shows the time measurements for each algorithm and its test case. Most of which are fast or 
+rapid as compared to other test cases having most values near 0. On the other hand, Test Case 4 for the 
+DFS (around 85 seconds) and A Star Algorithm (around 20 seconds), and Test Case 6  for the DFS Algorithm (around 32 seconds), 
+showing substantial execution time for these three instances. Based on these results, It illustrates how the Depth-First 
+Search algorithm is more time-intensive compared to the other two search algorithms. Also, It shows how the 
+different test cases affect execution time, wherein Test Cases 4 and 6 appear to be more complicated than of the others. 
+
+All in all, the A star algorithm appears to be the most efficient search algorithm, based on execution 
+time, compared to the BFS and DFS search algorithms.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{pictures-Elisha/States Visited (1).png}
+    \caption{States Visited bar graph Diagram}
+    \label{fig:states_visited_bar_graph}
+\end{figure}
+
+As seen in this chart, It shows the number of states visited across all the test cases. 
+It is evident in Test Cases 4 and 6 there is a significant difference among the other cases. 
+Test Case 4 using BFS Algorithm shows the highest number of states. It stays consistent how Test Case 
+4 appears to be the more complex case among the rest. Similarly, A star Algorithm also stays 
+consistent as the most efficient algorithm.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{pictures-Elisha/Path Cost (1).png}
+    \caption{Path Cost bar graph Diagram}
+    \label{fig:path_cost_bar_graph}
+\end{figure}
+
+The chart shows the path cost with most Test Cases showing minimal time except again for 
+Test Cases 4 and 6, peaking at around 60,000 and 40,000 respectively. Additionally, the chart 
+shows significant results for the BFS and A Star search algorithms once again. Such results stay 
+consistent with the previous findings, overall, the A star algorithm appears to be the most efficient 
+and optimal search algorithm.
+
+
+\subsection{Minimax}
+
+\subsection{Naive Minimax}
+\begin{itemize}
+    \item Nodes explored: 15172
+    \item Execution time:  0.042225 seconds
+\end{itemize}
+
+\subsection{Minimax with Alpha-Beta}
+\begin{itemize}
+    \item Nodes explored: 1086
+    \item Prunes: 410
+    \item Execution time: 0.004222 seconds
+\end{itemize} 
+
+
+Based on these results, the Alpha-Beta-Pruning Algorithm outperformed the Naive Minimax 
+Algorithm having an average execution time of 0.004222 seconds making it around 10 times faster 
+than the latter. Additionally, the nodes explored by the Alpha-Beta-Pruning Algorithm have fewer 
+than Naive Minimax, due to the pruning mechanism utilized. Overall, the results show the efficiency 
+of Alpha-Beta-Pruning Algorithm in making optimal moves as well as reducing search spaces.
+
+
 \end{document}
