@@ -13,6 +13,7 @@
 # https://stackoverflow.com/questions/2294493/how-to-get-the-position-of-a-character-in-python
 # https://www.w3schools.com/python/ref_func_abs.asp
 
+import utils.session
 import time
 #placeholder for board
 board_list = []
