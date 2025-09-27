@@ -298,4 +298,68 @@ optimally. This algorithm checks and evaluates all possible moves in a game tree
 made through a recursive algorithm. It considers the possible moves the maximizing player can make 
 and chooses one that practically maximizes the other player’s worst move or outcome.
 
+
+\setcounter{section}{1}
+\renewcommand{\thesection}{\Roman{section}}
+
+\stepcounter{section}
+\section*{\normalsize \thesection. EXTENDED METHODS}
+\addcontentsline{toc}{section}{\thesection. Extended Methods}
+
+
+% SECTION 2
+\section{Extended Methods}
+For the 8-puzzle implementation, a dictionary was primarily used to map integers from 1 to 9 to another 
+set of integers from 0 to 8, representing the slots or tiles of the game board. Additionally, other data 
+structures such as lists, queues, and stacks were employed in the implementation of the search algorithm functions.
+For the Tic-Tac-Toe implementation, a dictionary was used to map integers from 1 to 9 to 
+either ``\_’’, ``X’’, or ``O’’. This structure efficiently updates and accesses board positions throughout the game.
+
+\subsection{8-puzzle Implementation (Full Code in Appendix)}
+\begin{itemize}
+  \item \texttt{empty\_slot(board)} – takes in the puzzle board and finds the position or index of the empty slot(‘0’) in the board.
+
+  \item \texttt{valid\_moves(i)} – takes (‘i’) position and checks for all its possible moves. It returns a list of the tile at position (‘i’) with its adjacent positions.
+
+  \item \texttt{move(board, pos)} – takes in the puzzle board and the pos (empty slot) and moves it based on the user’s input of (‘w’ (up), ‘a’ (left), ‘x’ (down), ‘d’ (right). It then calculates for the new position.
+
+  \item \texttt{check\_win(board)} – takes in the puzzle board and checks if it matches with the goal state.
+
+  \item \texttt{solve\_bfs(initial\_state)} – solves the puzzle board using Breadth-First-Search which finds the shortest path to reach the goal state.
+
+  \item \texttt{solve\_dfs(initial\_state)} – solves the puzzle board using Depth-First-Search which explores each branch of the graph until reaching the goal state.
+
+  \item \texttt{heuristic(initial\_state)} – calculates for the number of misplaced tiles in comparison to the supposed goal state for the puzzle.
+
+  \item \texttt{solve\_astar(initial\_state, heuristic)} – implements the A* search algorithm and finds the shortest path from the initial to goal state, utilizing the heuristic function. 
+\end{itemize}
+
+\subsection{Tic-tac-toe Implementation (Full Code in Appendix)}
+\begin{itemize}
+  \item \texttt{check\_win(spaces)} – takes in the game board(spaces) and checks for all the possible winning combinations on the board (rows, columns, or diagonals). It then checks for a winner.
+
+  \item \texttt{utility(spaces)} – takes in and evaluates the game board for the minimax algorithm. It assigns a resulting value or score based on the result.
+
+  \item \texttt{max\_value(spaces, a, b)} –  recursive function that simulates the moves to find the maximum utility for the maximizing player.
+
+  \item \texttt{min\_value(spaces, a, b)} – recursive function that simulates the moves to find the minimum utility for the minimizer player.
+
+  \item \texttt{alpha\_beta\_search(spaces, player)} – utilizes minimax algorithm with alpha-beta pruning to find the best possible move for the player.
+\end{itemize}
+
+
+\subsubsection{Choice of data structure, per algorithm, per exercise; and}
+\subsubsection{What are the differences between each one’s implementation ?}.\newline
+The 8-puzzle game used uninformed and informed search algorithms for state exploration. 
+Breadth-First-Search used a queue, to find the shortest possible solution path. On the other hand, 
+Depth-First-Search used a stack to explore each branch up to the last nodes of the graph. The A* algorithm 
+utilized a heuristic function for counting misplaced tiles. Given this, it uses an evaluation function 
+of F = G(path cost) + H (heuristic value). This balances the performance of the player, being the most optimal.
+
+The Tic-tac-toe game, used an adversarial search utilizing the Minimax algorithm 
+together with alpha-beta pruning. The code implements utility evaluation and searches through possible 
+moves recursively and finds the most optimal move for the maximizing player. Comparing this to the 8-puzzle 
+game, instead of searching for a single fixed goal, the former is concerned with making decisions  against an 
+opponent. Entailing maximizing and minimizing the moves until an end result.
+
 \end{document}
